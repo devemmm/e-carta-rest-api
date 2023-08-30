@@ -10,7 +10,7 @@ router.get("/", (req, res) =>
     req,
     res,
     type: responses.SUCCESS,
-    data: "SAMS API is running....",
+    data: "ecarta API is running....",
   })
 );
 

@@ -1,56 +1,57 @@
-import { Request, Response } from "express"
-import jwt from 'jsonwebtoken';
-import User from '../users/schema';
+import { Request, Response } from "express";
+import jwt from "jsonwebtoken";
+import Organisation from "../organization/schema";
 
 class Authorization {
+  async requireAuth(req: Request, res: Response, next: any) {
+    const { authorization } = req.headers;
 
-    async requireAuth(req: Request, res: Response, next: any) {
+    try {
+      if (!authorization) {
+        throw new Error("authorization token is null");
+      }
 
-        const { authorization } = req.headers
+      const token = authorization.replace("Bearer ", "");
 
+      jwt.verify(token, process.env.JWT_SECRET, async (error, payload) => {
         try {
-            if (!authorization) {
-                throw new Error('authorization token is null')
-            }
+          next();
 
-            const token = authorization.replace('Bearer ', "");
+          // if (error) {
+          //     throw new Error("authorization token is invalid")
+          // }
 
-            jwt.verify(token, process.env.JWT_SECRET, async (error, payload) => {
+          // const tokenData = await User.findOne({ 'tokens.token': token })
 
-                try {
-                    next();
-                    
-                    // if (error) {
-                    //     throw new Error("authorization token is invalid")
-                    // }
+          // if (!tokenData) {
+          //     throw new Error("authorization token expired please signin again")
+          // }
 
-                    // const tokenData = await User.findOne({ 'tokens.token': token })
+          // const user = await User.findOne({ _id: tokenData._id })
 
-                    // if (!tokenData) {
-                    //     throw new Error("authorization token expired please signin again")
-                    // }
+          // if (!user) {
+          //     throw new Error('session was been  expired please signin again')
+          // }
 
-
-                    // const user = await User.findOne({ _id: tokenData._id })
-
-                    // if (!user) {
-                    //     throw new Error('session was been  expired please signin again')
-                    // }
-
-                    // req.user = user
-                    // req.user.token = token
-                    // next()
-                } catch (error) {
-                    res.status(401).json({ error: { statusCode: 401, status: "failed", message: error.message } })
-                }
-            })
-
+          // req.user = user
+          // req.user.token = token
+          // next()
         } catch (error) {
-            res.status(401).json({ error: { statusCode: 401, status: "failed", message: error.message } })
+          res.status(401).json({
+            error: {
+              statusCode: 401,
+              status: "failed",
+              message: error.message,
+            },
+          });
         }
+      });
+    } catch (error) {
+      res.status(401).json({
+        error: { statusCode: 401, status: "failed", message: error.message },
+      });
     }
+  }
 }
 
-
-
-export default Authorization
+export default Authorization;

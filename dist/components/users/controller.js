@@ -20,26 +20,35 @@ class Controller extends controller_1.default {
         super();
     }
     signup(req, res) {
+        const _super = Object.create(null, {
+            sendResponse: { get: () => super.sendResponse }
+        });
         return __awaiter(this, void 0, void 0, function* () {
             const data = yield new service_1.default().signup(req, res);
             return data
-                ? this.sendResponse({ req, res, type: Constants_1.responses.SUCCESS, data })
+                ? _super.sendResponse.call(this, { req, res, type: Constants_1.responses.SUCCESS, data })
                 : null;
         });
     }
     signin(req, res) {
+        const _super = Object.create(null, {
+            sendResponse: { get: () => super.sendResponse }
+        });
         return __awaiter(this, void 0, void 0, function* () {
             const data = yield new service_1.default().signin(req, res);
             return data
-                ? this.sendResponse({ req, res, type: Constants_1.responses.SUCCESS, data })
+                ? _super.sendResponse.call(this, { req, res, type: Constants_1.responses.SUCCESS, data })
                 : null;
         });
     }
     list(req, res) {
+        const _super = Object.create(null, {
+            sendResponse: { get: () => super.sendResponse }
+        });
         return __awaiter(this, void 0, void 0, function* () {
             const users = yield new service_1.default().list(req, res);
             return users
-                ? this.sendResponse({
+                ? _super.sendResponse.call(this, {
                     req,
                     res,
                     type: Constants_1.responses.SUCCESS,

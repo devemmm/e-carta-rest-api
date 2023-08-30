@@ -22,13 +22,21 @@ class Service extends controller_1.default {
     }
     signup(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const user = new schema_1.default(req.body);
             try {
-                yield user.save();
-                // await user.generateAuthToken();
-                return user;
+                const user = yield schema_1.default.create({
+                    id: 1,
+                    fname: "Emmanuel",
+                    lname: "NTIVUGURUZWA",
+                    email: "jhghdf@gmail.com",
+                    country: "RWANDA",
+                    phone: "0726252552",
+                    dob: "2022-02-06",
+                    password: "kwuwefiug2f",
+                });
+                return [{ data: "messa" }];
             }
             catch (error) {
+                console.log(error.message);
                 let responseType = Constants_1.responses.BAD_REQUEST;
                 responseType.MSG = error.message;
                 this.sendResponse({ req, res, type: responseType, data: {} });

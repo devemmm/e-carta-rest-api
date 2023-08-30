@@ -41,7 +41,7 @@ class Validator {
 
   static listSurveyResponses = joi.object().keys({
     generateReport: joi.boolean(),
-    email: joi.string()
+    email: joi.string(),
   });
   static getSuveyStatisticsById = joi.object().keys({
     id: joi.string().required(),
@@ -61,15 +61,15 @@ class Validator {
 
   static changePassword = joi.object().keys({
     password: joi.string().required(),
-    newPassword: joi.string().required()
-  })
+    newPassword: joi.string().required(),
+  });
 
   static updateAccount = joi.object().keys({
     country: joi.string().required(),
     address: joi.string().required(),
     phone: joi.string().required(),
-    about: joi.string().required()
-  })
+    about: joi.string().required(),
+  });
 }
 
 export default Validator;

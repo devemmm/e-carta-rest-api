@@ -12,7 +12,7 @@ router.get("/", (req, res) => new controller_1.default().sendResponse({
     req,
     res,
     type: Constants_1.responses.SUCCESS,
-    data: "SAMS API is running....",
+    data: "ecarta API is running....",
 }));
 fs_1.default.readdir(__dirname, function (err, components) {
     if (err) {

@@ -4,17 +4,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const router = (0, express_1.default)();
 const controller_1 = __importDefault(require("./controller"));
 const validator_1 = __importDefault(require("../base/validator"));
 const Validation_1 = __importDefault(require("../../helper/Validation"));
 const requireAuth_1 = __importDefault(require("../middleware/requireAuth"));
+const router = (0, express_1.default)();
 const controller = new controller_1.default();
 const validator = new validator_1.default();
 const authorization = new requireAuth_1.default();
-router
-    .route("/signup")
-    .post(validator.validateRequest.bind(new validator_1.default().init(Validation_1.default.signup)), controller.signup.bind(controller));
+router.post("/signup", controller.signup);
 router
     .route("/signin")
     .post(validator.validateRequest.bind(new validator_1.default().init(Validation_1.default.signin)), controller.signin.bind(controller));
