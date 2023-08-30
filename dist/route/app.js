@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.router = void 0;
 const express_1 = __importDefault(require("express"));
 exports.router = express_1.default.Router();
-exports.router.get('/', (req, res) => {
-    res.send('Express + TypeScript Server');
+exports.router.get("/", (req, res) => {
+    res.send("Express + TypeScript Server");
 });
 //# sourceMappingURL=app.js.map

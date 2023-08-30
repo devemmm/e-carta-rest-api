@@ -39,7 +39,7 @@ Validator.respondSurvey = joi_1.default.object().keys({
 });
 Validator.listSurveyResponses = joi_1.default.object().keys({
     generateReport: joi_1.default.boolean(),
-    email: joi_1.default.string()
+    email: joi_1.default.string(),
 });
 Validator.getSuveyStatisticsById = joi_1.default.object().keys({
     id: joi_1.default.string().required(),
@@ -56,13 +56,13 @@ Validator.userMessage = joi_1.default.object().keys({
 Validator.getUserMessage = joi_1.default.object().keys();
 Validator.changePassword = joi_1.default.object().keys({
     password: joi_1.default.string().required(),
-    newPassword: joi_1.default.string().required()
+    newPassword: joi_1.default.string().required(),
 });
 Validator.updateAccount = joi_1.default.object().keys({
     country: joi_1.default.string().required(),
     address: joi_1.default.string().required(),
     phone: joi_1.default.string().required(),
-    about: joi_1.default.string().required()
+    about: joi_1.default.string().required(),
 });
 exports.default = Validator;
 //# sourceMappingURL=Validation.js.map

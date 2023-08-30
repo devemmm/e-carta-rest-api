@@ -3,9 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// require("./mongodb");
-require('./db');
-require('dotenv-flow').config();
+require("dotenv-flow").config();
 const express_1 = __importDefault(require("express"));
 // const docs = require('../documentation/index')
 const cors_1 = __importDefault(require("cors"));
@@ -18,13 +16,14 @@ app.use(express_1.default.json());
 app.use(index_1.default);
 // app.use("/api-docs", serve, setup(docs))
 app.use((req, res) => {
-    res
-        .status(500)
-        .json({
+    res.status(500).json({
         now: new Utils_1.default().rightNow(),
         status: 500,
         message: "route not found",
     });
 });
+// db.sync()
+//     .then((result)=> console.log("connected to database"))
+//     .catch((error)=> console.log("error ocpaied", error.message))
 exports.default = app;
 //# sourceMappingURL=app.js.map

@@ -13,7 +13,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const schema_1 = __importDefault(require("../users/schema"));
 class Authorization {
     requireAuth(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -25,20 +24,21 @@ class Authorization {
                 const token = authorization.replace('Bearer ', "");
                 jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET, (error, payload) => __awaiter(this, void 0, void 0, function* () {
                     try {
-                        if (error) {
-                            throw new Error("authorization token is invalid");
-                        }
-                        const tokenData = yield schema_1.default.findOne({ 'tokens.token': token });
-                        if (!tokenData) {
-                            throw new Error("authorization token expired please signin again");
-                        }
-                        const user = yield schema_1.default.findOne({ _id: tokenData._id });
-                        if (!user) {
-                            throw new Error('session was been  expired please signin again');
-                        }
-                        req.user = user;
-                        req.user.token = token;
                         next();
+                        // if (error) {
+                        //     throw new Error("authorization token is invalid")
+                        // }
+                        // const tokenData = await User.findOne({ 'tokens.token': token })
+                        // if (!tokenData) {
+                        //     throw new Error("authorization token expired please signin again")
+                        // }
+                        // const user = await User.findOne({ _id: tokenData._id })
+                        // if (!user) {
+                        //     throw new Error('session was been  expired please signin again')
+                        // }
+                        // req.user = user
+                        // req.user.token = token
+                        // next()
                     }
                     catch (error) {
                         res.status(401).json({ error: { statusCode: 401, status: "failed", message: error.message } });

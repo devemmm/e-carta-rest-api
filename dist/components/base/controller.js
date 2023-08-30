@@ -6,6 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Utils_1 = __importDefault(require("../../helper/Utils"));
 const Constants_1 = require("../../libs/Constants");
 class Controller {
+    constructor() {
+        return this;
+    }
     static formartResponse() {
         return {
             now: new Utils_1.default().rightNow(),
