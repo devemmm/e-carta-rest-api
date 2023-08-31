@@ -24,11 +24,10 @@ class Service extends Controller {
   async update(req: Request, res: Response) {
     try {
       let { status, name, displayName, dataType, orgId } = req.query;
-
       let config = await Schema.findByPk(req.params.id);
 
       if (status) {
-        config.dataValues.status = status.toString();
+        config.setDataValue("status", status.toString());
         return await config.save();
       }
 
