@@ -9,6 +9,8 @@ const validator = new Validator();
 
 router.post("/create", controller.create);
 
+router.patch("/:id", controller.update);
+
 router
   .route("/")
   .get(

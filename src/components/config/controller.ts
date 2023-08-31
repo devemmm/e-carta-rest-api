@@ -15,6 +15,13 @@ class Controller extends BaseController {
       : null;
   }
 
+  async update(req: Request, res: Response) {
+    const data = await new Service().update(req, res);
+    return data
+      ? super.sendResponse({ req, res, type: responses.SUCCESS, data })
+      : null;
+  }
+
   async list(req: Request, res: Response) {
     const config = await new Service().list(req, res);
 
