@@ -21,6 +21,26 @@ class Service extends Controller {
     }
   }
 
+  async update(req: Request, res: Response) {
+    try {
+      let { status, name, displayName, dataType, orgId } = req.query;
+      let config = await Schema.findByPk(req.params.id);
+
+      if (status) {
+        config.setDataValue("status", status.toString());
+        return await config.save();
+      }
+
+      return config;
+    } catch (error) {
+      console.log(error.message);
+      let responseType = responses.BAD_REQUEST;
+      responseType.MSG = error.message;
+
+      this.sendResponse({ req, res, type: responseType, data: {} });
+    }
+  }
+
   async list(req: Request, res: Response) {
     try {
       return await Schema.findAll({});
