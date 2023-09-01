@@ -22,6 +22,6 @@ export const findByCredential = async (email: string, password: string) => {
     return organization;
   };
 
-  export const generateAuthToken = async function (_id) {
-    return jwt.sign({ _id: _id.toString() }, process.env.JWT_SECRET);
+  export const generateAuthToken = async function (_id: string) {
+    return jwt.sign({ id: _id.toString() }, process.env.JWT_SECRET);
   };
