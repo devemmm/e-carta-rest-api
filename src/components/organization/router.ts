@@ -10,6 +10,15 @@ const validator = new Validator();
 router.post("/register", controller.create);
 
 router
+  .route("/signin")
+  .post(
+    validator.validateRequest.bind(
+      new Validator().init(requestValidator.signin)
+    ),
+    controller.signin.bind(controller)
+  );
+
+router
   .route("/")
   .get(
     validator.validateRequest.bind(

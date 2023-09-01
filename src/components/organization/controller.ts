@@ -15,6 +15,13 @@ class Controller extends BaseController {
       : null;
   }
 
+  async signin(req: Request, res: Response) {
+    const ordanization = await new Service().signin(req, res);
+    return ordanization
+      ? super.sendResponse({ req, res, type: responses.SUCCESS, data: ordanization })
+      : null;
+  }
+
   async list(req: Request, res: Response) {
     const organisation = await new Service().list(req, res);
 
