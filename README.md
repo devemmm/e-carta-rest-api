@@ -1,8 +1,10 @@
-[ ] create user modal
-[ ] signin 
-[ ] signup
+## default configuration
 
-npx sequelize model:generate --name User --attributes fname:string,lname:string,email:string,country:string,phone:string,dob:string,password:string
-
-//Deleting migrations
-npx sequelize db:migrate:undo
+# NAME (KEY)             VALUE          description       datatype
+# ================  =============== =================== =============
+PANDEMIC_STATUS          ENABLED        pandemic status     string
+APP_STATUS               ENABLED        App Status          string
+startDate                ENABLED        start date          string
+SIGNIN_PROGRAM           DEFAULT        active program      string
+SIGNIN_DB_ATTRIBUTE      DEFAULT        attribute-(unique)  string
+CERTIFICATE_PROGRAMS     DEFAULT        certificate program string

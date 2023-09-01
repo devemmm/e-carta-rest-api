@@ -3,12 +3,14 @@
 import { Model, DataTypes, Optional } from "sequelize";
 import db, { sequelize } from "../../config/db";
 
-import Conf from "../config/schema";
+import Conf from "../configuration/schema";
 import Announcement from "../announcement/schema";
 
 interface OrganizationAttributes {
   id?: number;
   name: string;
+  appName: string;
+  logo: string;
   code: string;
   longitude: number;
   latitude: number;
@@ -19,6 +21,7 @@ interface OrganizationAttributes {
   dhis2pswd: string;
   username: string;
   password: string;
+  colors: string;
 }
 type OrganizationCreationAttributes = Optional<OrganizationAttributes, "id">;
 
@@ -36,6 +39,14 @@ Organization.init(
       primaryKey: true,
     },
     name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    appName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    logo: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -78,6 +89,11 @@ Organization.init(
     password: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    colors: {
+      type: DataTypes.STRING(700),
+      defaultValue:
+        '{"primary":{"name":"primary color","code":"#fff"},"secondary":{"name":"secondary color","code":"#0c0d0d"},"tertiary":{"name":"tertiary color","code":"#0c8004"},"quaternary":{"name":"quaternary color","code":"#7a504d"},"senary":{"name":"senary color","code":"#253e99"},"septenary":{"name":"septenary color","code":"#b3651d"},"octonary":{"name":"octonary color","code":"#db07a6"},"nonary":{"name":"nonary color","code":"#07dbcd"},"denary":{"name":"denary color","code":"#9807db"}}',
     },
   },
   { sequelize, modelName: "Organization", tableName: "organization" }
