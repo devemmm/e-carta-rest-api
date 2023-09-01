@@ -3,7 +3,7 @@
 import { Model, DataTypes, Optional } from "sequelize";
 import db, { sequelize } from "../../config/db";
 
-import Conf from "../config/schema";
+import Conf from "../configuration/schema";
 import Announcement from "../announcement/schema";
 
 interface OrganizationAttributes {

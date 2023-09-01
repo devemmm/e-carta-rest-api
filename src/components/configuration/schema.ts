@@ -1,21 +1,21 @@
 "use strict";
 
 import { Model, DataTypes, Optional } from "sequelize";
-import db, { sequelize } from "../../config/db";
+import { sequelize } from "../../config/db";
 
-interface ConfAttributes {
+interface ConfigurationAttributes {
   id?: number;
-  name: string;
-  displayName: string;
+  key: string;
+  value: string;
+  description: string;
   dataType: string;
-  status: string;
   orgId: number;
 }
-type ConfCreationAttributes = Optional<ConfAttributes, "id">;
+type ConfigurationCreationAttributes = Optional<ConfigurationAttributes, "id">;
 
-class Conf extends Model<ConfAttributes, ConfCreationAttributes> {}
+class Configuration extends Model<ConfigurationAttributes, ConfigurationCreationAttributes> {}
 
-Conf.init(
+Configuration.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -23,19 +23,19 @@ Conf.init(
       allowNull: false,
       primaryKey: true,
     },
-    name: {
+    key: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    displayName: {
+    value: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    description: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     dataType: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    status: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -44,9 +44,9 @@ Conf.init(
       allowNull: false,
     },
   },
-  { sequelize, modelName: "Conf", tableName: "conf" }
+  { sequelize, modelName: "Configuration", tableName: "configuration" }
 );
 
-Conf.sync();
+Configuration.sync();
 
-export default Conf;
+export default Configuration;
