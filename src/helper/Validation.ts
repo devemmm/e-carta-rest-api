@@ -19,6 +19,11 @@ class Validator {
     password: joi.string().required(),
   });
 
+  static signin_user = joi.object().keys({
+    organization: joi.string().required(),
+    code: joi.string().required(),
+  });
+
   static listUsers = joi.object().keys();
 
   static createSurvey = joi.object().keys({

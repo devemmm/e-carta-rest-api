@@ -8,13 +8,6 @@ class Controller extends BaseController {
     super();
   }
 
-  async create(req: Request, res: Response) {
-    const data = await new Service().create(req, res);
-    return data
-      ? super.sendResponse({ req, res, type: responses.SUCCESS, data })
-      : null;
-  }
-
   async signin(req: Request, res: Response) {
     const ordanization = await new Service().signin(req, res);
     return ordanization
@@ -23,19 +16,6 @@ class Controller extends BaseController {
           res,
           type: responses.SUCCESS,
           data: ordanization,
-        })
-      : null;
-  }
-
-  async list(req: Request, res: Response) {
-    const organisation = await new Service().list(req, res);
-
-    return organisation
-      ? super.sendResponse({
-          req,
-          res,
-          type: responses.SUCCESS,
-          data: organisation,
         })
       : null;
   }
