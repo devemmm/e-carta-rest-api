@@ -22,6 +22,7 @@ interface OrganizationAttributes {
   username: string;
   password: string;
   colors: string;
+  token: string
 }
 type OrganizationCreationAttributes = Optional<OrganizationAttributes, "id">;
 
@@ -41,10 +42,12 @@ Organization.init(
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true
     },
     appName: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true
     },
     logo: {
       type: DataTypes.STRING,
@@ -65,6 +68,7 @@ Organization.init(
     contact: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true
     },
     key: {
       type: DataTypes.STRING,
@@ -73,6 +77,7 @@ Organization.init(
     dhis2url: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true
     },
     dhis2pswd: {
       type: DataTypes.STRING,
@@ -81,10 +86,12 @@ Organization.init(
     email: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true
     },
     username: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true
     },
     password: {
       type: DataTypes.STRING,
@@ -95,6 +102,10 @@ Organization.init(
       defaultValue:
         '{"primary":{"name":"primary color","code":"#fff"},"secondary":{"name":"secondary color","code":"#0c0d0d"},"tertiary":{"name":"tertiary color","code":"#0c8004"},"quaternary":{"name":"quaternary color","code":"#7a504d"},"senary":{"name":"senary color","code":"#253e99"},"septenary":{"name":"septenary color","code":"#b3651d"},"octonary":{"name":"octonary color","code":"#db07a6"},"nonary":{"name":"nonary color","code":"#07dbcd"},"denary":{"name":"denary color","code":"#9807db"}}',
     },
+    token: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    }
   },
   { sequelize, modelName: "Organization", tableName: "organization" }
 );
