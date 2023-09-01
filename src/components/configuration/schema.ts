@@ -13,7 +13,10 @@ interface ConfigurationAttributes {
 }
 type ConfigurationCreationAttributes = Optional<ConfigurationAttributes, "id">;
 
-class Configuration extends Model<ConfigurationAttributes, ConfigurationCreationAttributes> {}
+class Configuration extends Model<
+  ConfigurationAttributes,
+  ConfigurationCreationAttributes
+> {}
 
 Configuration.init(
   {
@@ -26,6 +29,7 @@ Configuration.init(
     key: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
     value: {
       type: DataTypes.STRING,

@@ -19,10 +19,10 @@ interface OrganizationAttributes {
   key: string;
   dhis2url: string;
   dhis2pswd: string;
-  username: string;
+  dhis2username: string;
   password: string;
   colors: string;
-  token: string
+  token: string;
 }
 type OrganizationCreationAttributes = Optional<OrganizationAttributes, "id">;
 
@@ -42,12 +42,12 @@ Organization.init(
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
+      unique: true,
     },
     appName: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
+      unique: true,
     },
     logo: {
       type: DataTypes.STRING,
@@ -68,7 +68,7 @@ Organization.init(
     contact: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
+      unique: true,
     },
     key: {
       type: DataTypes.STRING,
@@ -77,7 +77,12 @@ Organization.init(
     dhis2url: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
+      unique: true,
+    },
+    dhis2username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
     },
     dhis2pswd: {
       type: DataTypes.STRING,
@@ -86,13 +91,9 @@ Organization.init(
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
+      unique: true,
     },
-    username: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
-    },
+
     password: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -105,7 +106,7 @@ Organization.init(
     token: {
       type: DataTypes.STRING,
       allowNull: true,
-    }
+    },
   },
   { sequelize, modelName: "Organization", tableName: "organization" }
 );

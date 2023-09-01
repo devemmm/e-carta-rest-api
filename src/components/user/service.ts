@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import Organization from "../organization/schema";
 import Controller from "../base/controller";
 import { responses } from "../../libs/Constants";
+import Configuration from "../configuration/schema";
 
 class Service extends Controller {
   constructor() {
@@ -19,23 +20,27 @@ class Service extends Controller {
       });
 
       if (organization) {
-        // console.log(organization.dataValues);
+        const configurationData = await Configuration.findAll({
+          where: { orgId: organization.getDataValue("id") },
+        });
 
-        // CHECK DHIS2 URL
-
-        // console.log(organization.dataValues.dhis2url);
-        // let dhis2url = organization.dataValues.dhis2url
-        let dhis2url = "http://62.171.128.111:8080";
+        let SIGNIN_DB_ATTRIBUTE = configurationData
+          .find((conf) => conf.getDataValue("key") == "SIGNIN_DB_ATTRIBUTE")
+          .getDataValue("value");
+        let SIGNIN_PROGRAM = configurationData
+          .find((conf) => conf.getDataValue("key") == "SIGNIN_PROGRAM")
+          .getDataValue("value");
 
         const user = await axios({
           method: "get",
-          url: `${dhis2url}/api/trackedEntityInstances/query.json?ouMode=ACCESSIBLE&program=ZpIRnN2Bqq0&attribute=Rs7cCYHlJkK:LIKE:${req.body.code}&pageSize=50&page=1&totalPages=false`,
-          headers: {
-            Authorization: "Basic YWJpemFpdGg6QWJpbmlvemExIUA=",
-            Cookie: "JSESSIONID=8ED90ECAB3A775F1BAD734BD5C586497",
+          url: `${organization.dataValues.dhis2url}/api/trackedEntityInstances/query.json?ouMode=ACCESSIBLE&program=${SIGNIN_PROGRAM}&attribute=${SIGNIN_DB_ATTRIBUTE}:LIKE:${req.body.code}&pageSize=50&page=1&totalPages=false`,
+          auth: {
+            username: `${organization.getDataValue("dhis2username")}`,
+            password: `${organization.getDataValue("dhis2pswd")}`,
           },
           maxBodyLength: Infinity,
         });
+
         if (user.data.rows.length > 0) {
           let fname = user.data.headers.find(
             (item: any) => item.column === "First Name"
