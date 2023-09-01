@@ -18,7 +18,7 @@ Experience the future of formal document management with e-carta.
 
 # NAME (KEY)             VALUE          description       datatype
 # ================  =============== =================== =============
-PANDEMIC_STATUS          ENABLED        pandemic status     string
+REPORT_STATUS            ENABLED        report status       string
 APP_STATUS               ENABLED        App Status          string
 startDate                ENABLED        start date          string
 SIGNIN_PROGRAM           DEFAULT        active program      string
